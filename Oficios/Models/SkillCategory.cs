@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Oficios.Models
 {
-    public class SkillCategoryModel
+    public class SkillCategory
     {
         [BindNever]
         public int SkillCategoryId { get; set; }
@@ -19,5 +19,9 @@ namespace Oficios.Models
         [Required(ErrorMessage = "A SkillCategory Description is required")]
         [StringLength(200)]
         public string Description { get; set; }
+        public bool Equals(SkillCategory sCategory)
+        {
+            return this.SkillCategoryId == sCategory.SkillCategoryId;
+        }
     }
 }

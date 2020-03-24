@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Oficios.Models
 {
-    public class UserModel
+    public class User
     {
         [BindNever]
         public int UserId { get; set; }
@@ -23,11 +23,22 @@ namespace Oficios.Models
         [Display(Name = "Last name")]
         [StringLength(50)]
         public string LastName { get; set; }
-        
+
+        [Range(1000, 9999, ErrorMessage ="Enter a valid 4 digit postal code")]
+        [Display(Name = "PostalCode")]
+        public int PostalCode { get; set; }
+
+        [StringLength(100)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Province")]
+        public string Province { get; set; }
+
         [StringLength(100)]
         [Display(Name = "Address Line 1")]
         public string Address { get; set; }
-        
+
         [Required]
         [StringLength(50)]
         [DataType(DataType.EmailAddress)]
@@ -40,6 +51,6 @@ namespace Oficios.Models
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
         
-        public List<JobModel> JobsReceived { get; set; }
+        public List<Job> JobsReceived { get; set; }
     }
 }

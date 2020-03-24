@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Oficios.Models
 {
-    public class JobModel
+    public class Job
     {
         [BindNever]
         public int JobId { get; set; }
@@ -20,12 +20,14 @@ namespace Oficios.Models
         public int Score { get; set; }
 
         [Required(ErrorMessage = "A Job Skill is required")]
-        public SkillModel Skill { get; set; }
+        public Skill Skill { get; set; }
 
-        [Required(ErrorMessage = "The Professional who made this Job is required")]
-        public ProfessionalModel Professional { get; set; }
+        [Required(ErrorMessage = "The Worker who made this Job is required")]
+        public Worker Worker { get; set; }
 
         [Required(ErrorMessage = "The User who received this Job is required")]
-        public UserModel User { get; set; }
+        public User User { get; set; }
+        [BindNever]
+        public DateTime JobPlaced { get; set; }
     }
 }
