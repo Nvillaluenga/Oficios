@@ -12,7 +12,7 @@ namespace Oficios.Data
     {
         private readonly OficioDbContext _oficioDbContext;
 
-        SkillRepository(OficioDbContext oficioDbContext)
+        public SkillRepository(OficioDbContext oficioDbContext)
         {
             this._oficioDbContext = oficioDbContext;
         }

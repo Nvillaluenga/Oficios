@@ -12,11 +12,11 @@ namespace Oficios.Data
     {
         private readonly OficioDbContext _oficioDbContext;
 
-        JobRepository(OficioDbContext oficioDbContext)
+        public JobRepository(OficioDbContext oficioDbContext)
         {
             this._oficioDbContext = oficioDbContext;
         }
-        
+         
         public async Task<Job> Add(Job job)
         {
             job.JobPlaced = DateTime.Now;

@@ -59,12 +59,22 @@ namespace Oficios.Migrations
                         new
                         {
                             JobId = 1,
-                            JobPlaced = new DateTime(2020, 3, 24, 16, 37, 59, 214, DateTimeKind.Local).AddTicks(1420),
+                            JobPlaced = new DateTime(2020, 3, 29, 22, 11, 59, 6, DateTimeKind.Local).AddTicks(3820),
                             Opinion = "A pretty good worker.",
                             Score = 5,
                             SkillId = 1,
                             UserId = 1,
                             WorkerUserId = 3
+                        },
+                        new
+                        {
+                            JobId = 2,
+                            JobPlaced = new DateTime(2020, 3, 29, 22, 11, 59, 7, DateTimeKind.Local).AddTicks(5698),
+                            Opinion = "A pretty good worker.",
+                            Score = 5,
+                            SkillId = 2,
+                            UserId = 2,
+                            WorkerUserId = 4
                         });
                 });
 
@@ -223,7 +233,7 @@ namespace Oficios.Migrations
                             Email = "nachovillaluenga@gmail.com",
                             LastName = "Villaluenga",
                             Name = "Nacho",
-                            PostalCode = 0
+                            PostalCode = 4146
                         },
                         new
                         {
@@ -232,7 +242,7 @@ namespace Oficios.Migrations
                             Email = "nachovillaluenga2@gmail.com",
                             LastName = "Villaluenga2",
                             Name = "Nacho 2",
-                            PostalCode = 0
+                            PostalCode = 4146
                         });
                 });
 
@@ -257,8 +267,18 @@ namespace Oficios.Migrations
                             Email = "worker@gmail.com",
                             LastName = "Walker",
                             Name = "Worker",
-                            PostalCode = 0,
+                            PostalCode = 4146,
                             Description = "Some description."
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            Address = "work street 2",
+                            Email = "worker2@gmail.com",
+                            LastName = "Walker2",
+                            Name = "Worker2",
+                            PostalCode = 4146,
+                            Description = "Some description2."
                         });
                 });
 
@@ -273,13 +293,13 @@ namespace Oficios.Migrations
                     b.HasOne("Oficios.Models.User", "User")
                         .WithMany("JobsReceived")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Oficios.Models.Worker", "Worker")
                         .WithMany("JobsMade")
                         .HasForeignKey("WorkerUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

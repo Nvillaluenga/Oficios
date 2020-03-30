@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Oficios.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class FirstishMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -99,13 +99,13 @@ namespace Oficios.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Jobs_Users_WorkerUserId",
                         column: x => x.WorkerUserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -122,14 +122,18 @@ namespace Oficios.Migrations
                 columns: new[] { "UserId", "Address", "City", "Discriminator", "Email", "LastName", "Name", "PhoneNumber", "PostalCode", "Province" },
                 values: new object[,]
                 {
-                    { 1, "Houssay 1925", null, "User", "nachovillaluenga@gmail.com", "Villaluenga", "Nacho", null, 0, null },
-                    { 2, "Houssay 2925", null, "User", "nachovillaluenga2@gmail.com", "Villaluenga2", "Nacho 2", null, 0, null }
+                    { 1, "Houssay 1925", null, "User", "nachovillaluenga@gmail.com", "Villaluenga", "Nacho", null, 4146, null },
+                    { 2, "Houssay 2925", null, "User", "nachovillaluenga2@gmail.com", "Villaluenga2", "Nacho 2", null, 4146, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Address", "City", "Discriminator", "Email", "LastName", "Name", "PhoneNumber", "PostalCode", "Province", "Description", "ImageUrl" },
-                values: new object[] { 3, "work street 1", null, "Worker", "worker@gmail.com", "Walker", "Worker", null, 0, null, "Some description.", null });
+                values: new object[,]
+                {
+                    { 3, "work street 1", null, "Worker", "worker@gmail.com", "Walker", "Worker", null, 4146, null, "Some description.", null },
+                    { 4, "work street 2", null, "Worker", "worker2@gmail.com", "Walker2", "Worker2", null, 4146, null, "Some description2.", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Skills",
@@ -145,7 +149,12 @@ namespace Oficios.Migrations
             migrationBuilder.InsertData(
                 table: "Jobs",
                 columns: new[] { "JobId", "JobPlaced", "Opinion", "Score", "SkillId", "UserId", "WorkerUserId" },
-                values: new object[] { 1, new DateTime(2020, 3, 24, 16, 37, 59, 214, DateTimeKind.Local).AddTicks(1420), "A pretty good worker.", 5, 1, 1, 3 });
+                values: new object[] { 1, new DateTime(2020, 3, 29, 22, 11, 59, 6, DateTimeKind.Local).AddTicks(3820), "A pretty good worker.", 5, 1, 1, 3 });
+
+            migrationBuilder.InsertData(
+                table: "Jobs",
+                columns: new[] { "JobId", "JobPlaced", "Opinion", "Score", "SkillId", "UserId", "WorkerUserId" },
+                values: new object[] { 2, new DateTime(2020, 3, 29, 22, 11, 59, 7, DateTimeKind.Local).AddTicks(5698), "A pretty good worker.", 5, 2, 2, 4 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Jobs_SkillId",

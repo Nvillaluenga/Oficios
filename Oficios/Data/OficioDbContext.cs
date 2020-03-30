@@ -22,21 +22,22 @@ namespace Oficios.Data
 
         protected override void OnModelCreating(ModelBuilder mbldr)
         {
-            mbldr.Entity<User>()
-                .HasData(new User
+            mbldr.Entity<User>().HasData(new User
                 {
                     UserId = 1,
                     Name = "Nacho",
                     LastName = "Villaluenga",
                     Address = "Houssay 1925",
-                    Email = "nachovillaluenga@gmail.com"
+                    Email = "nachovillaluenga@gmail.com",
+                    PostalCode = 4146
                 }, new User
                 {
                     UserId = 2,
                     Name = "Nacho 2",
                     LastName = "Villaluenga2",
                     Address = "Houssay 2925",
-                    Email = "nachovillaluenga2@gmail.com"
+                    Email = "nachovillaluenga2@gmail.com",
+                    PostalCode = 4146
                 });
 
             mbldr.Entity<SkillCategory>()
@@ -78,17 +79,30 @@ namespace Oficios.Data
                     SkillCategoryId = 1
                 });
             mbldr.Entity<Worker>()
-                .HasData(new Worker
+                .HasData(new
                 {
                     UserId = 3,
                     Name = "Worker",
                     LastName = "Walker",
                     Address = "work street 1",
                     Email = "worker@gmail.com",
-                    Description = "Some description."
+                    Description = "Some description.",
+                    PostalCode = 4146
+                }, new
+                {
+                UserId = 4,
+                    Name = "Worker2",
+                    LastName = "Walker2",
+                    Address = "work street 2",
+                    Email = "worker2@gmail.com",
+                    Description = "Some description2.",
+                    PostalCode = 4146
                 });
-            mbldr.Entity<Job>()
-                .HasData(new 
+            mbldr.Entity<Job>().HasOne(j => j.User).WithMany(u => u.JobsReceived).OnDelete(DeleteBehavior.Restrict);
+            mbldr.Entity<Job>().HasOne(j => j.Worker).WithMany(w => w.JobsMade).OnDelete(DeleteBehavior.Restrict);
+            // mbldr.Entity<Job>().HasOne(j => j.Skill).
+
+            mbldr.Entity<Job>().HasData(new
                 {
                     JobId = 1,
                     Score = 5,
@@ -97,7 +111,17 @@ namespace Oficios.Data
                     UserId = 1,
                     WorkerUserId = 3,
                     Opinion = "A pretty good worker."
+                }, new
+                {
+                    JobId = 2,
+                    Score = 5,
+                    SkillId = 2,
+                    JobPlaced = DateTime.Now,
+                    UserId = 2,
+                    WorkerUserId = 4,
+                    Opinion = "A pretty good worker."
                 });
+            base.OnModelCreating(mbldr);
         }
     }
 }
